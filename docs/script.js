@@ -46,14 +46,26 @@ if(visual && window.innerWidth>800){
 }
 
 
-async function loadServicesForRequest(){
-  const select=document.getElementById("serviceSelect");
-  if(!select) return;
-  try{
-    const r=await fetch("/api/services");
-    const d=await r.json();
-    if(d.success) d.services.forEach(s=>{const o=document.createElement("option");o.value=s.service_id;o.textContent=s.service_name;select.appendChild(o);});
-  }catch(e){ console.log("Services could not be loaded",e); }
+function loadServicesForRequest(){
+    const select = document.getElementById("serviceSelect");
+
+    if(!select) return;
+
+    const services = [
+        { service_id: 1, service_name: "Agent Banking" },
+        { service_id: 2, service_name: "Mobile Money Services" },
+        { service_id: 3, service_name: "Video Games" }
+    ];
+
+    services.forEach(service => {
+        const option = document.createElement("option");
+
+        option.value = service.service_id;
+        option.textContent = service.service_name;
+
+        select.appendChild(option);
+    });
+}
 }
 
 const requestForm=document.getElementById("requestForm");
